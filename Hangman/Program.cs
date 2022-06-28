@@ -20,6 +20,7 @@ namespace Hangman
             int index = random.Next(listWords.Count);
             string randomWord = listWords[index];
             char[] guess = new char[randomWord.Length];
+            Console.WriteLine($"Hint: The word contain : {randomWord.Length} letters");
             Console.Write("Please enter your guess:  ");
 
             for (int i = 0; i < randomWord.Length; i++)
@@ -31,12 +32,16 @@ namespace Hangman
                     for (int j = 0; j < randomWord.Length; j++)
                     {
                         if (playerGuess == randomWord[j])
-                            guess[j] = playerGuess;
+                            guess[j] = playerGuess;                                             
                     }
-                    Console.WriteLine($"You have {limitAttempts} left");
+                    if (playerGuess == randomWord.Length)
+                    {
+                        Console.WriteLine("You win");
+                    }
+                    Console.WriteLine($"You have:  {limitAttempts} left");
                     limitAttempts--;
                     Console.WriteLine(guess);
-                    if (limitAttempts == 0)
+                    if (limitAttempts == 0 )
                     {
                         break;
                     }
