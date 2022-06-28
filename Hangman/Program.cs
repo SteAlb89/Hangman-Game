@@ -15,36 +15,41 @@ namespace Hangman
             //Create a list of string
             //Acces the string from the list
             var random = new Random();
-            int limitAttempts = 6;
             var listWords = new List<string> { "computer", "programming", "animals", "fruits", "vegetables", "cars" };
             int index = random.Next(listWords.Count);
             string randomWord = listWords[index];
             char[] guess = new char[randomWord.Length];
             Console.WriteLine($"Hint: The word contain : {randomWord.Length} letters");
             Console.Write("Please enter your guess:  ");
+            int limitAttempts = randomWord.Length;
 
             for (int i = 0; i < randomWord.Length; i++)
                 guess[i] = '_';
             {
                 while (true)
                 {
-                    char playerGuess = char.Parse(Console.ReadLine());
+                    char playerGuess = Convert.ToChar(Console.ReadLine()[0]);
+                    
                     for (int j = 0; j < randomWord.Length; j++)
                     {
                         if (playerGuess == randomWord[j])
-                            guess[j] = playerGuess;                                             
+                            guess[j] = playerGuess;                       
                     }
                     if (playerGuess == randomWord.Length)
                     {
+
                         Console.WriteLine("You win");
                     }
                     Console.WriteLine($"You have:  {limitAttempts} left");
-                    limitAttempts--;
+
                     Console.WriteLine(guess);
-                    if (limitAttempts == 0 )
+                    if (randomWord.Length == 0)
                     {
                         break;
                     }
+                    limitAttempts--;
+
+
                 }
             }
                 
