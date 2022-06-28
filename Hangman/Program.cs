@@ -7,7 +7,7 @@ namespace Hangman
 {
     class Program
     {
-       
+
         static void Main(string[] args)
         {
 
@@ -24,38 +24,26 @@ namespace Hangman
             int limitAttempts = randomWord.Length;
 
             for (int i = 0; i < randomWord.Length; i++)
-                guess[i] = '_';
+                guess[i] = '*';
             {
                 while (true)
                 {
                     char playerGuess = Convert.ToChar(Console.ReadLine()[0]);
-                    
+
                     for (int j = 0; j < randomWord.Length; j++)
                     {
                         if (playerGuess == randomWord[j])
-                            guess[j] = playerGuess;                       
-                    }
-                    if (playerGuess == randomWord.Length)
-                    {
-
-                        Console.WriteLine("You win");
+                            guess[j] = playerGuess;
                     }
                     Console.WriteLine($"You have:  {limitAttempts} left");
-
                     Console.WriteLine(guess);
-                    if (randomWord.Length == 0)
+                    if (limitAttempts == 0)
                     {
                         break;
                     }
                     limitAttempts--;
-
-
                 }
             }
-                
-
-           
-
         }
     }
 }
