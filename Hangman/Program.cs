@@ -25,7 +25,7 @@ namespace Hangman
 
             for (int i = 0; i < randomWord.Length; i++)
                 guess[i] = '*';
-            {
+                
                 while (true)
                 {
                     char playerGuess = Convert.ToChar(Console.ReadLine()[0]);
@@ -43,7 +43,6 @@ namespace Hangman
                     }
                     limitAttempts--;
                 }
-            }
         }
     }
 }
