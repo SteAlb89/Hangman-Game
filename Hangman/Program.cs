@@ -21,28 +21,34 @@ namespace Hangman
             char[] guess = new char[randomWord.Length];
             Console.WriteLine($"Hint: The word contain : {randomWord.Length} letters");
             Console.Write("Please enter your guess:  ");
-            int limitAttempts = randomWord.Length;
+            
 
             for (int i = 0; i < randomWord.Length; i++)
                 guess[i] = '*';
 
             while (true)
             {
+                int limitAttempts = 6;
                 char playerGuess = Convert.ToChar(Console.ReadLine()[0]);
 
-                for (int j = 0; j < randomWord.Length; j++)
+                for (int j = 0; j < limitAttempts; j++)
                 {
                     if (playerGuess == randomWord[j])
-                        guess[j] = playerGuess;
+                    {                      
+                        guess[j] = playerGuess;                        
+                    }
+
                 }
+                
                 Console.WriteLine($"You have:  {limitAttempts} left");
                 Console.WriteLine(guess);
+
                 if (limitAttempts == 0)
                 {
-                    break;
-                }
-                limitAttempts--;
+                    break;                    
+                }               
             }
+            Console.WriteLine($"The word is {randomWord}");
         }
     }
 }
