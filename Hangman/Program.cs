@@ -33,6 +33,8 @@ namespace Hangman
             {
                 Console.WriteLine("Please enter a letter: ");
                 Console.WriteLine($"The word is format from: {word.Length} letters");
+                
+
 
                 guess = Console.ReadLine();
                 if(word.Contains(guess))
@@ -45,6 +47,7 @@ namespace Hangman
                     {
                         guessedLetter = true;
                         break;
+
                     }
                     else
                     {
@@ -88,11 +91,11 @@ namespace Hangman
                         break;
                     }
                     Console.WriteLine("Wrong guess");
-                    Console.WriteLine($"Right: {correctLetter}");
-                    guess = "";
+                    Console.WriteLine($"You guessed : {correctLetter}letters untill now !");
+                    guess = "_";
                     
                 }
-                
+
 
             }
             if (limitAttempts >= 1 || correctLetter == word.Length || guessedLetter)
@@ -104,7 +107,6 @@ namespace Hangman
             {
                 Console.WriteLine($"You lose ! The word was {word}");
             }
-            Console.ReadKey();
         }
     }
 }
