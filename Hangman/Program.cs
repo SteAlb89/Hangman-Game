@@ -91,7 +91,7 @@ namespace Hangman
                         break;
                     }
                     Console.WriteLine("Wrong guess");
-                    Console.WriteLine($"You guessed : {correctLetter}letters untill now !");
+                    Console.WriteLine($"You guessed : {correctLetter} letters untill now !");
                     guess = "_";
                     
                 }
