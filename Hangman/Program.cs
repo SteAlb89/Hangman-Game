@@ -33,18 +33,27 @@ namespace Hangman
             while (correctLetter || lives == 0)
             {
                 char inputLetter = char.Parse(Console.ReadLine());
+                for( int j = 0; j < hideWord.Length; j++)
+                {
+                    if (inputLetter == hideWord[j])
+                        guess[j] = inputLetter;
 
+                }
                 foreach(char letters in guess)
                 {
                     if (hideWord.Contains(letters))
-                        inputLetter = guess[letters];
+                    {
+                        Console.WriteLine($"The letters you already said are :  {letters} ");
+                        
+                       
+                    }
                 }
                 Console.WriteLine($"You still have: {lives} left");
                 lives--;
                 Console.WriteLine(guess);
                 if(lives == 0)
                 {
-                    Console.WriteLine("You are out of lives");
+                    Console.WriteLine("Sorry , but you are out of lives");
                     correctLetter = false;
                 }
             }
