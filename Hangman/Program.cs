@@ -11,13 +11,13 @@ namespace Hangman
         {
             //Create a random string 
             Random random = new Random();
-           
+
             //Create a list of words
             string[] listWords = { "weather", "sport", "vacation", "money", "fitness" };
             var randomWords = random.Next(0, listWords.Length);
             string hideWord = listWords[randomWords];
             char[] guess = new char[hideWord.Length];
-            int lives = 8;
+
 
             //Giving more information about the word which should be guessed
             Console.WriteLine($"Hint: The word is format from {hideWord.Length} letters");
@@ -26,50 +26,57 @@ namespace Hangman
             Console.WriteLine("Please enter a letter: ");
 
             //Create a for loop which hide the length of the word with * 
-            for ( int i = 0; i < hideWord.Length; i++)
-                   guess[i] = '*';
+            for (int i = 0; i < hideWord.Length; i++)
+            {
+                guess[i] = '*';
+            }
             //Create a while loop which is looping untill the the user input match the word
             bool correctLetter = true;
-            while (correctLetter || lives == 0)
-            {
-               char inputChar;
-               bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
-                if(!isLetter)
+            int lives = 8;
+
+            while (correctLetter)
+            {               
+                char inputChar;
+                bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
+
+                //Check if the user input a char and not a other data types
+                if (!isLetter)
                 {
                     Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
-                    continue;
-                }               
-                for( int j = 0; j < hideWord.Length; j++)
+                    isLetter = true;
+                }
+
+   
+                //Create a for loop which show if the guessed a letter
+                for (int j = 0; j < hideWord.Length; j++)
                 {
                     if (inputChar == hideWord[j])
-                        guess[j] = inputChar;
-
-                }
-                foreach(char letters in guess)
-                {
-                    if (hideWord.Contains(letters))
                     {
-                        Console.WriteLine($"The letters you already said are :  {letters} ");
-                        
-                       
-                    }
+                        guess[j] = inputChar;
+                    }                    
                 }
-                Console.WriteLine($"You still have: {lives} left");
-                lives--;
-                Console.WriteLine(guess);
-                if(lives == 0)
+                //Create an if statements to show to the user which guessed letter is correct and which not !
+                if (hideWord.Contains(inputChar))
                 {
-                    Console.WriteLine("Sorry , but you are out of lives");
+                    Console.WriteLine($"You guessed: {inputChar} , and it is correct !");
+                }
+                else if (!hideWord.Contains(inputChar))
+                {
+                    Console.WriteLine($"You guessed: {inputChar}, and it is incorrect");
+                    lives--;
+                }
+                Console.WriteLine($"You still have: {lives} left  ");
+
+                Console.WriteLine(guess);
+
+                //Create a variable which count the lives left if the user input doesn't match to randomWord
+                if (lives == 0)
+                {
+                    Console.WriteLine($"Sorry , but you are out of lives. The word was: {hideWord}");
                     correctLetter = false;
                 }
+                
             }
-            //Check if the user input a char and not a other data types
-            //Make a function which check if the char match to your randomWord
-            //Create a variable which count the lives left if the user input doesn't match to randomWord
-
-
-
-
         }
     }
 }
