@@ -9,104 +9,45 @@ namespace Hangman
     {
         static void Main(string[] args)
         {
-
-            //Create a random
-            //Create a list of string
-            //Acces the string from the list
-            
-            string[] listWords = { "computer", "programming", "animals", "fruits", "vegetables", "cars" };
-            int correctLetter = 0;
-
+            //Create a random string 
             Random random = new Random();
-            int randomWord = random.Next(0, listWords.Length);
+           
+            //Create a list of words
+            string[] listWords = { "weather", "sport", "vacation", "money", "fitness" };
+            var randomWords = random.Next(0, listWords.Length);
+            string hideWord = listWords[randomWords];
+            char[] guess = new char[hideWord.Length];
 
-            string word = listWords[randomWord];
+            //Giving more information about the word which should be guessed
+            Console.WriteLine($"Hint: The word is format from {hideWord.Length} letters");
 
-            int limitAttempts = 8;
+            //Ask the user to input a char
+            Console.WriteLine("Please enter a letter: ");
 
-            bool guessedLetter = false;
-
-            string guess;
-
-            
-            while (limitAttempts >= 1 || !(correctLetter == word.Length))
+            //Create a for loop which hide the length of the word with * 
+            for ( int i = 0; i < hideWord.Length; i++)
+                guess[i] = '*';
+            //Create a while loop which is looping untill the the user input match the word
+            bool correctLetter = true;
+            while (correctLetter)
             {
-                Console.WriteLine("Please enter a letter: ");
-                Console.WriteLine($"The word is format from: {word.Length} letters");
-                
+                char inputLetter = char.Parse(Console.ReadLine());
 
-
-                guess = Console.ReadLine();
-                if(word.Contains(guess))
-                {                   
-                    if (guess == word)
-                    {
-                        guessedLetter = true;
-                        break;
-                    }else if(correctLetter == word.Length)
-                    {
-                        guessedLetter = true;
-                        break;
-
-                    }
-                    else
-                    {
-                        correctLetter++;
-                        Console.WriteLine($"Correct letters :{correctLetter} ");
-                    }
-                }
-                else
+                foreach(char letters in hideWord)
                 {
-                    limitAttempts--;
-                    if (limitAttempts == 7)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if (limitAttempts == 6)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if(limitAttempts == 5)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if(limitAttempts == 4)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if(limitAttempts == 3)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if(limitAttempts == 2)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if(limitAttempts == 1)
-                    {
-                        Console.WriteLine($"You still have: {limitAttempts} chance");
-                    }
-                    else if (limitAttempts == 0)
-                    {
-                        break;
-                    }
-                    Console.WriteLine("Wrong guess");
-                    Console.WriteLine($"You guessed : {correctLetter} letters untill now !");
-                    guess = "_";
-                    
+                    if(hideWord.Contains(letters))
+                        inputLetter = letters;
                 }
+                Console.WriteLine(guess);
+                Console.WriteLine(hideWord);
+            }
+            //Check if the user input a char and not a other data types
+            //Make a function which check if the char match to your randomWord
+            //Create a variable which count the lives left if the user input doesn't match to randomWord
 
 
-            }
-            if (limitAttempts >= 1 || correctLetter == word.Length || guessedLetter)
-            {
-                Console.WriteLine("Congratulation ! You guessed the word");
-                Console.WriteLine($"The word was : {word}");
-            }
-            else
-            {
-                Console.WriteLine($"You lose ! The word was {word}");
-            }
+
+
         }
     }
 }
