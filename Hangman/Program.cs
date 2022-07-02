@@ -20,7 +20,7 @@ namespace Hangman
 
 
             //Giving more information about the word which should be guessed
-            Console.WriteLine($"Hint: The word is format from {hideWord.Length} letters");
+            Console.WriteLine($"Hint: The word is format from {hideWord.Length} letters ");
 
             //Ask the user to input a char
             Console.WriteLine("Please enter a letter: ");
@@ -29,6 +29,7 @@ namespace Hangman
             for (int i = 0; i < hideWord.Length; i++)
             {
                 guess[i] = '*';
+
             }
             //Create a while loop which is looping untill the the user input match the word
             bool correctLetter = true;
@@ -43,10 +44,8 @@ namespace Hangman
                 if (!isLetter)
                 {
                     Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
-                    isLetter = true;
+                    continue;
                 }
-
-   
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hideWord.Length; j++)
                 {
