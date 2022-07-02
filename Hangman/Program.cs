@@ -32,11 +32,17 @@ namespace Hangman
             bool correctLetter = true;
             while (correctLetter || lives == 0)
             {
-                char inputLetter = char.Parse(Console.ReadLine());
+               char inputChar;
+               bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
+                if(!isLetter)
+                {
+                    Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
+                    continue;
+                }               
                 for( int j = 0; j < hideWord.Length; j++)
                 {
-                    if (inputLetter == hideWord[j])
-                        guess[j] = inputLetter;
+                    if (inputChar == hideWord[j])
+                        guess[j] = inputChar;
 
                 }
                 foreach(char letters in guess)
