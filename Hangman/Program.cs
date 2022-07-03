@@ -14,28 +14,28 @@ namespace Hangman
 
             //Create a list of words
             string[] listWords = { "weather", "sport", "vacation", "money", "fitness" };
-            var randomWords = random.Next(0, listWords.Length);
-            string hideWord = listWords[randomWords];
-            char[] guess = new char[hideWord.Length];
+            var randomIndex = random.Next(0, listWords.Length);
+            string hiddenWord = listWords[randomIndex];
+            char[] displayWord = new char[hiddenWord.Length];
 
 
             //Giving more information about the word which should be guessed
-            Console.WriteLine($"Hint: The word is format from {hideWord.Length} letters ");
+            Console.WriteLine($"Hint: The word is format from {hiddenWord.Length} letters ");
 
             //Ask the user to input a char
             Console.WriteLine("Please enter a letter: ");
 
             //Create a for loop which hide the length of the word with * 
-            for (int i = 0; i < hideWord.Length; i++)
+            for (int i = 0; i < hiddenWord.Length; i++)
             {
-                guess[i] = '*';
+                displayWord[i] = '*';
 
             }
             //Create a while loop which is looping untill the the user input match the word
-            bool correctLetter = true;
+            bool gameIsRunning = true;
             int lives = 8;
 
-            while (correctLetter)
+            while (gameIsRunning)
             {               
                 char inputChar;
                 bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
@@ -47,32 +47,32 @@ namespace Hangman
                     continue;
                 }
                 //Create a for loop which show if the guessed a letter
-                for (int j = 0; j < hideWord.Length; j++)
+                for (int j = 0; j < hiddenWord.Length; j++)
                 {
-                    if (inputChar == hideWord[j])
+                    if (inputChar == hiddenWord[j])
                     {
-                        guess[j] = inputChar;
+                        displayWord[j] = inputChar;
                     }                    
                 }
                 //Create an if statements to show to the user which guessed letter is correct and which not !
-                if (hideWord.Contains(inputChar))
+                if (hiddenWord.Contains(inputChar))
                 {
                     Console.WriteLine($"You guessed: {inputChar} , and it is correct !");
                 }
-                else if (!hideWord.Contains(inputChar))
+                else if (!hiddenWord.Contains(inputChar))
                 {
                     Console.WriteLine($"You guessed: {inputChar}, and it is incorrect");
                     lives--;
                 }
                 Console.WriteLine($"You still have: {lives} left  ");
 
-                Console.WriteLine(guess);
+                Console.WriteLine(displayWord);
 
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
                 if (lives == 0)
                 {
-                    Console.WriteLine($"Sorry , but you are out of lives. The word was: {hideWord}");
-                    correctLetter = false;
+                    Console.WriteLine($"Sorry , but you are out of lives. The word was: {hiddenWord}");
+                    gameIsRunning = false;
                 }
                 
             }
