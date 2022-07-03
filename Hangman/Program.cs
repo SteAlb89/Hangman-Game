@@ -18,6 +18,8 @@ namespace Hangman
             string hiddenWord = listWords[randomIndex];
             char[] displayWord = new char[hiddenWord.Length];
 
+            //TODO: Initialize list of past guesses
+
 
             //Giving more information about the word which should be guessed
             Console.WriteLine($"Hint: The word is format from {hiddenWord.Length} letters ");
@@ -47,19 +49,21 @@ namespace Hangman
                     continue;
                 }
                 //Create a for loop which show if the guessed a letter
+                bool correctLetter = false;
                 for (int j = 0; j < hiddenWord.Length; j++)
                 {
                     if (inputChar == hiddenWord[j])
                     {
                         displayWord[j] = inputChar;
+                        correctLetter = true;
                     }                    
                 }
                 //Create an if statements to show to the user which guessed letter is correct and which not !
-                if (hiddenWord.Contains(inputChar))
+                if (correctLetter)
                 {
                     Console.WriteLine($"You guessed: {inputChar} , and it is correct !");
                 }
-                else if (!hiddenWord.Contains(inputChar))
+                else
                 {
                     Console.WriteLine($"You guessed: {inputChar}, and it is incorrect");
                     lives--;
@@ -69,7 +73,7 @@ namespace Hangman
                 Console.WriteLine(displayWord);
 
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
-                if (lives == 0)
+                if (lives <= 0)
                 {
                     Console.WriteLine($"Sorry , but you are out of lives. The word was: {hiddenWord}");
                     gameIsRunning = false;
