@@ -17,9 +17,8 @@ namespace Hangman
             var randomIndex = random.Next(0, listWords.Length);
             string hiddenWord = listWords[randomIndex];
             char[] displayWord = new char[hiddenWord.Length];
-            
+
             //TODO: Initialize list of past guesses
-            
 
             //Giving more information about the word which should be guessed
             Console.WriteLine($"Hint: The word is format from {hiddenWord.Length} letters ");
@@ -32,13 +31,12 @@ namespace Hangman
             {
                 displayWord[i] = '*';
 
-            }          
+            }
             bool gameIsRunning = true;
             int lives = 8;
             //Create a while loop which is looping untill the the user input match the word
             while (gameIsRunning)
             {
-
                 char inputChar;
                 bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
                 //Check if the user input a char and not a other data types
@@ -47,10 +45,6 @@ namespace Hangman
                     Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
                     continue;
                 }
-
-
-
-
                 bool correctLetter = false;
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hiddenWord.Length; j++)
@@ -63,6 +57,7 @@ namespace Hangman
                 }
                 //Create a new string which Convert the char displayWord in a string
                 string guessedWord = new string(displayWord);
+
                 //Create an if statements which tells to the user as he guessed the word !
                 if (guessedWord == hiddenWord)
                 {
