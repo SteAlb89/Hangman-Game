@@ -17,16 +17,15 @@ namespace Hangman
             var randomIndex = random.Next(0, listWords.Length);
             string hiddenWord = listWords[randomIndex];
             char[] displayWord = new char[hiddenWord.Length];
-
+            
             //TODO: Initialize list of past guesses
-
+            
 
             //Giving more information about the word which should be guessed
             Console.WriteLine($"Hint: The word is format from {hiddenWord.Length} letters ");
 
-            //Ask the user to input a char
+            //Ask the user to input a char          
             Console.WriteLine("Please enter a letter: ");
-
             //Create a for loop which hide the length of the word with * 
             for (int i = 0; i < hiddenWord.Length; i++)
             {
@@ -38,10 +37,10 @@ namespace Hangman
             int lives = 8;
 
             while (gameIsRunning)
-            {               
+            {
                 char inputChar;
                 bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
-
+                
                 //Check if the user input a char and not a other data types
                 if (!isLetter)
                 {
@@ -49,6 +48,8 @@ namespace Hangman
                     continue;
                 }
                 //Create a for loop which show if the guessed a letter
+                string guessedWord = new string(displayWord);
+
                 bool correctLetter = false;
                 for (int j = 0; j < hiddenWord.Length; j++)
                 {
@@ -62,6 +63,7 @@ namespace Hangman
                 if (correctLetter)
                 {
                     Console.WriteLine($"You guessed: {inputChar} , and it is correct !");
+                    
                 }
                 else
                 {
@@ -71,14 +73,16 @@ namespace Hangman
                 Console.WriteLine($"You still have: {lives} left  ");
 
                 Console.WriteLine(displayWord);
-
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
                 if (lives <= 0)
                 {
                     Console.WriteLine($"Sorry , but you are out of lives. The word was: {hiddenWord}");
                     gameIsRunning = false;
                 }
-                
+                if(guessedWord == hiddenWord)
+                {
+                    Console.WriteLine($"Congratulation, you guessed the word  == > {hiddenWord} < == ");
+                }
             }
         }
     }
