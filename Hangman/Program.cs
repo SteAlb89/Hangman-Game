@@ -45,21 +45,23 @@ namespace Hangman
                 //Check if the user input a char and not a other data types
                 if (!isLetter)
                 {
-                    Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
+                    Console.Write("Please enter just a charachter or a letter like a, b, c");
                     continue;
                 }
                 //Store inputChar in new List
                 storedLetters.Add(inputChar);
 
                 //Create a foreach loop which store all the letters from the input user
-                Console.Write("Letters already in : ");
+                Console.Write("Letters already in : " );
                 foreach (char duplicateLetter in storedLetters)
                 {
-                    Console.Write( duplicateLetter );
-
+                    Console.Write(duplicateLetter);                    
                 }
-                Console.WriteLine();
-
+                Console.WriteLine( );
+                if(storedLetters.Count != storedLetters.Distinct().Count())
+                {
+                    Console.WriteLine($"You already guessed this letter {inputChar}");
+                }
                 bool correctLetter = false;
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hiddenWord.Length; j++)
@@ -70,6 +72,7 @@ namespace Hangman
                         correctLetter = true;
                     }
                 }
+
                 //Create a new string which Convert the char displayWord in a string
                 string guessedWord = new string(displayWord);
                 //Create an if statements which tells to the user as he guessed the word !
