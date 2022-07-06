@@ -44,19 +44,17 @@ namespace Hangman
                     Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
                     continue;
                 }
-                if(isLetter)
+
+                //Create a list which store the letters of user input
+                List<char> storedLetters = new List<char>();
+                storedLetters.Add(inputChar);
+                foreach (char duplicateLetter in storedLetters)
                 {
-                    //Create a list which store the letters of user input
-                    List<char> storedLetters = new List<char>();
-                    storedLetters.Add(inputChar);
-                    for (int l = 0; l < storedLetters.Count; l++)
-                    {
-                        var duplicateLetter = storedLetters[l];
-                        Console.WriteLine(duplicateLetter);
-                    }
+                    Console.WriteLine($"This is already in : {duplicateLetter}" );
                 }
+
                 bool correctLetter = false;
-                
+
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hiddenWord.Length; j++)
                 {
@@ -87,7 +85,7 @@ namespace Hangman
                     lives--;
                 }
                 Console.WriteLine($"You still have: {lives} left  ");
-                
+
 
                 Console.WriteLine(displayWord);
 
@@ -98,7 +96,7 @@ namespace Hangman
                     Console.WriteLine($"Sorry , but you are out of lives. The word was: {hiddenWord}");
                     gameIsRunning = false;
                 }
-                
+
             }
         }
     }
