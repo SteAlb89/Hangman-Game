@@ -18,6 +18,7 @@ namespace Hangman
             var randomIndex = random.Next(0, listWords.Length);
             string hiddenWord = listWords[randomIndex];
             char[] displayWord = new char[hiddenWord.Length];
+           
 
             //Create a list which store duplicateLetters
             List<char> storedLetters = new List<char>();
@@ -38,9 +39,9 @@ namespace Hangman
             //Create a while loop which is looping untill the the user input match the word
             while (gameIsRunning)
             {
-                char inputChar;
+                char inputChar ;
                 bool isLetter = char.TryParse(Console.ReadLine(), out inputChar);
-
+                inputChar = Char.ToLower(inputChar);
                 //Check if the user input a char and not a other data types
                 if (!isLetter)
                 {
@@ -71,7 +72,6 @@ namespace Hangman
                 }
                 //Create a new string which Convert the char displayWord in a string
                 string guessedWord = new string(displayWord);
-
                 //Create an if statements which tells to the user as he guessed the word !
                 if (guessedWord == hiddenWord)
                 {
