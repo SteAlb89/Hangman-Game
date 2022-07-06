@@ -19,6 +19,9 @@ namespace Hangman
             string hiddenWord = listWords[randomIndex];
             char[] displayWord = new char[hiddenWord.Length];
 
+            //Create a list which store duplicateLetters
+            List<char> storedLetters = new List<char>();
+
             //Giving more information about the word which should be guessed
             Console.WriteLine($"Hint: The word is format from {hiddenWord.Length} letters ");
 
@@ -44,17 +47,19 @@ namespace Hangman
                     Console.WriteLine("Please enter just a charachter or a letter like a, b, c");
                     continue;
                 }
-
-                //Create a list which store the letters of user input
-                List<char> storedLetters = new List<char>();
+                //Store inputChar in new List
                 storedLetters.Add(inputChar);
+
+                //Create a foreach loop which store all the letters from the input user
+                Console.Write("Letters already in : ");
                 foreach (char duplicateLetter in storedLetters)
                 {
-                    Console.WriteLine($"This is already in : {duplicateLetter}" );
+                    Console.Write( duplicateLetter );
+
                 }
+                Console.WriteLine();
 
                 bool correctLetter = false;
-
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hiddenWord.Length; j++)
                 {
@@ -71,7 +76,7 @@ namespace Hangman
                 if (guessedWord == hiddenWord)
                 {
                     Console.WriteLine($"Congratulation, you guessed the word  == > {hiddenWord} < == ");
-                    Console.WriteLine("Good training for brain ! See you next time !");
+                    Console.WriteLine("Good training for your brain ! See you next time !");
                     break;
                 }
                 //Create an if statements to show to the user which guessed letter is correct and which not !
@@ -85,7 +90,6 @@ namespace Hangman
                     lives--;
                 }
                 Console.WriteLine($"You still have: {lives} left  ");
-
 
                 Console.WriteLine(displayWord);
 
