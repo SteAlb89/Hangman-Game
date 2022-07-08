@@ -35,7 +35,7 @@ namespace Hangman
                 displayWord[i] = '*';
             }
             bool gameIsRunning = true;
-            int lives = 8;
+            int lives = hiddenWord.Length;
             //Create a while loop which is looping untill the the user input match the word
             while (gameIsRunning)
             {
@@ -50,7 +50,10 @@ namespace Hangman
                 }
                 //Store inputChar in new List
                 storedLetters.Add(inputChar);
-
+                if (storedLetters.Count != storedLetters.Distinct().Count())
+                {
+                    Console.WriteLine($"You already guessed this letter {inputChar}");
+                }
                 //Create a foreach loop which store all the letters from the input user
                 Console.Write("Letters already in : " );
                 foreach (char duplicateLetter in storedLetters)
@@ -58,10 +61,6 @@ namespace Hangman
                     Console.Write(duplicateLetter);                    
                 }
                 Console.WriteLine( );
-                if(storedLetters.Count != storedLetters.Distinct().Count())
-                {
-                    Console.WriteLine($"You already guessed this letter {inputChar}");
-                }
                 bool correctLetter = false;
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hiddenWord.Length; j++)
@@ -72,7 +71,7 @@ namespace Hangman
                         correctLetter = true;
                     }
                 }
-
+                Console.WriteLine(hiddenWord.Length);
                 //Create a new string which Convert the char displayWord in a string
                 string guessedWord = new string(displayWord);
                 //Create an if statements which tells to the user as he guessed the word !
@@ -90,15 +89,15 @@ namespace Hangman
                 else
                 {
                     Console.WriteLine($"You guessed: {inputChar}, and it is incorrect");
-                    lives--;
+                    lives-- ;
                 }
                 Console.WriteLine($"You still have: {lives} left  ");
-
                 Console.WriteLine(displayWord);
+                Console.WriteLine();
 
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
 
-                if (lives <= hiddenWord.Length)
+                if (lives <= 0)
                 {
                     Console.WriteLine($"Sorry , but you are out of lives. The word was: {hiddenWord}");
                     gameIsRunning = false;
