@@ -98,7 +98,7 @@ namespace Hangman
 
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
 
-                if (lives <= 0)
+                if (lives <= hiddenWord.Length)
                 {
                     Console.WriteLine($"Sorry , but you are out of lives. The word was: {hiddenWord}");
                     gameIsRunning = false;
