@@ -51,15 +51,14 @@ namespace Hangman
                     continue;
                 }
                 //Store inputChar in new List
-                storedLetters.Add(inputChar);
-                //Create a method which group all the letters and filters out the groups which appear only one time and leave them out with duplicate keys
-                {
-                    IEnumerable<char> repeteadLetter = storedLetters.GroupBy(x => x)
-                                             .Where(g => g.Count() > 1)
-                                             .Select(x => x.Key);
 
-                    Console.WriteLine("This letter you already repeated: " + String.Join(",", repeteadLetter));
-                }
+                //Create a method which group all the letters and filters out the groups which appear only one time and leave them out with duplicate keys
+                /* IEnumerable<char> repeteadLetter = storedLetters.GroupBy(x => x)  //TODO: maybe refactzor / re-implement
+                                          .Where(g => g.Count() > 1)
+                                          .Select(x => x.Key);
+
+                 Console.WriteLine("This letter you already repeated: " + String.Join(",", repeteadLetter)); */
+
 
                 //Create a foreach loop which store all the letters from the input user
                 Console.Write($"Letters which you already enter it are: ");
@@ -68,7 +67,7 @@ namespace Hangman
                     Console.Write(duplicateLetter);
                 }
                 Console.WriteLine();
-                
+
                 bool correctLetter = false;
                 //Create a for loop which show if the guessed a letter
                 for (int j = 0; j < hiddenWord.Length; j++)
@@ -81,6 +80,7 @@ namespace Hangman
                 }
                 //Create a new string which Convert the char displayWord in a string
                 string guessedWord = new string(displayWord);
+
                 //Create an if statements which tells to the user as he guessed the word !
                 if (guessedWord == hiddenWord)
                 {
@@ -98,9 +98,35 @@ namespace Hangman
                     Console.WriteLine($"You guessed: {inputChar}, and it is incorrect");
                     lives--;
                 }
+                int countLetters = 0;
+                if (!storedLetters.Contains(inputChar))
+                {
+                    storedLetters.Add(inputChar);
+                    for (int c = 0; c < storedLetters.Count; c++)
+                    {
+                        if(storedLetters[c] == inputChar)
+                        {
+                            countLetters++;
+                        }
+                    }                   
+                }
+                else
+                {
+                    for(int r = 0; r < storedLetters.Count; r++)
+                    {
+                        if (storedLetters[r] == inputChar)
+                        {
+                            countLetters++;
+                        }
+                    }
+                    storedLetters.Add(inputChar);
+                    
+                    Console.WriteLine($"You already said this letter: {countLetters} times");
+                }
                 Console.WriteLine($"You still have: {lives} left  ");
                 Console.WriteLine(displayWord);
                 Console.WriteLine();
+              
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
                 if (lives <= 0)
                 {
