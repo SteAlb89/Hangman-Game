@@ -98,35 +98,20 @@ namespace Hangman
                     Console.WriteLine($"You guessed: {inputChar}, and it is incorrect");
                     lives--;
                 }
-                int countLetters = 0;
                 if (!storedLetters.Contains(inputChar))
-                {
-                    storedLetters.Add(inputChar);
-                    for (int c = 0; c < storedLetters.Count; c++)
                     {
-                        if(storedLetters[c] == inputChar)
-                        {
-                            countLetters++;
-                        }
-                    }                   
+                    storedLetters.Add(inputChar);
                 }
                 else
                 {
-                    for(int r = 0; r < storedLetters.Count; r++)
-                    {
-                        if (storedLetters[r] == inputChar)
-                        {
-                            countLetters++;
-                        }
-                    }
-                    storedLetters.Add(inputChar);
+                    Console.WriteLine($"This letters is already said: {inputChar} ");
+                } 
                     
-                    Console.WriteLine($"You already said this letter: {countLetters} times");
-                }
+
                 Console.WriteLine($"You still have: {lives} left  ");
                 Console.WriteLine(displayWord);
                 Console.WriteLine();
-              
+
                 //Create a variable which count the lives left if the user input doesn't match to randomWord
                 if (lives <= 0)
                 {
